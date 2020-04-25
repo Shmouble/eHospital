@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\PermissionRegistrar;
+use App\User;
 
 class PermissionsAndRolesSeeder extends Seeder
 {
@@ -38,5 +39,10 @@ class PermissionsAndRolesSeeder extends Seeder
         Permission::create(['name' => 'make an appointment']);
         $role->givePermissionTo('edit personal data');
         $role->givePermissionTo('make an appointment');
+
+        // Главный root
+        $user = User::create([ 'name' => 'Administrator', 'email' => 'Administrator@gmail.com',
+            'password' => bcrypt('Administrator')]);
+        $user->assignRole('root.hospital');
     }
 }

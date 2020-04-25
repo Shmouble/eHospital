@@ -24,11 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        Role::create(['name' => 'root']);
-        Role::create(['name' => 'manager']);
-        Role::create(['name' => 'doctor']);
-        Role::create(['name' => 'patient']);
-
         return view('home');
     }
 }
