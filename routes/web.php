@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('department/{department}', 'DoctorController@index');
 
 Route::resource('doctor', 'DoctorController');
 Route::post('doctor/{doctor}/image', 'DoctorController@image');
+

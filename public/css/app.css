@@ -1209,7 +1209,6 @@ html, body {
     font-family: 'Nunito', sans-serif;
     font-weight: 200;
     height: 100vh;
-    margin: 0;
 }
 
 .full-height {
@@ -1270,5 +1269,10 @@ html, body {
 #docImg{
     width:100%;
     max-width:400px;
+}
+
+a.disabled {
+pointer-events: none;
+cursor: default;
 }
 

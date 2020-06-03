@@ -24,11 +24,16 @@ class ScheduleController extends Controller
             'end' => $end,
             'doctor_id' => $doctor
             ];
-        $schedule = Schedule::insert($insert);
+        $schedule = Schedule::create($insert);
         return Response::json($schedule);
     }
     
-    public function update(Request $request, $doctor)
+    public function edit($doctor, Schedule $schedule)
+    {
+        return Response::json($schedule);
+    }
+    
+    public function update(Request $request, $doctor, Schedule $schedule)
     {
         $start = new DateTime(($request->date) . ($request->start));
         $end = new DateTime(($request->date) . ($request->end));
@@ -36,13 +41,13 @@ class ScheduleController extends Controller
             'start' => $start,
             'end' => $end,
             ];
-        $schedule  = Schedule::where('id',$request->id)->update($update);
+        $schedule->update($update);
         return Response::json($schedule);
     }
     
-    public function destroy(Request $request)
+    public function destroy(Request $request, $doctor, Schedule $schedule)
     {
-        $event = Event::where('id',$request->id)->delete();
-        return Response::json($event);
+        $schedule->delete();
+        return Response::json($schedule);
     }
 }

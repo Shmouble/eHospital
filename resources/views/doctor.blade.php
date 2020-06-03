@@ -1,27 +1,7 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('app')
 
-        <!-- CSRF Token -->
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <title>{{ config('app.name', 'eHospital') }}</title>
-
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-      
-        <!-- Fonts -->
-        <link rel="dns-prefetch" href="//fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-        <!-- Styles --> 
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    </head>
-    <body>
+@section('content')
+       
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -84,7 +64,7 @@
                                 <input type="hidden" name="id">
                             </div>
                             <div class="modal-footer">
-                                <input type="submit" class="btn btn-primary" id="btn-update" value="Сохранить">
+                                <input type="submit" class="btn btn-primary" id="doc-update" value="Сохранить">
                             </div>
                         </form>
                     </div>
@@ -109,7 +89,7 @@
                                     </div>
                             </div>
                             <div class="modal-footer">
-                                <input type="submit" class="btn btn-primary" id="btn-update" value="Сохранить">
+                                <input type="submit" class="btn btn-primary" id="avatar-update" value="Сохранить">
                             </div>
                         </form>
                     </div>
@@ -121,7 +101,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Добавить расписание</h4>
+                        <h4 class="modal-title"></h4>
                         <button type="button" class="close" data-dismiss="modal">×</button>
                     </div>
                     <div class="modal-body">
@@ -142,14 +122,14 @@
                                         <input class="form-control timepicker" name="end" id="end">
                                     </div>
                                     <input type="hidden" id="date" name="date">
+                                    <input type="hidden" id="schedule_id" name="schedule_id">
                             </div>
                             <div class="modal-footer">
-                                <input type="submit" class="btn btn-primary" id="btn-update" value="Сохранить">
+                                <input type="submit" class="btn btn-primary" id="event-update" value="Сохранить">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div> 
-    </body>
-</html>
+@endsection    

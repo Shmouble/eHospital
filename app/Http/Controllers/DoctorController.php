@@ -14,9 +14,10 @@ class DoctorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($department)
     {
-        //
+        $doctors = Doctor::where('department_id', $department)->get(['id', 'name', 'education', 'experience', 'img_url']);
+        return view ('department', compact(['doctors', 'department']));
     }
 
     /**
@@ -27,7 +28,16 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'education' => 'required',
+           'experience' => 'required',
+        ]);
+         
+        $create = $request->all();
+        $doctor =Doctor::create($create);
+        
+        return Response::json($doctor);
     }
 
     /**
@@ -91,8 +101,9 @@ class DoctorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Doctor $doctor)
     {
-        //
+        $doctor->delete();
+        return Response::json($doctor);
     }
 }
