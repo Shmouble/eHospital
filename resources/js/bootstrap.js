@@ -18,9 +18,11 @@ try {
  * to our Laravel back-end. This library automatically handles sending the
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
-
+window.$ = window.jQuery = require('jquery');
 window.axios = require('axios');
-
+window.Popper = require('popper.js').default;
+require('bootstrap/dist/js/bootstrap.min.js');
+require('jquery-timepicker/jquery.timepicker.js');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**

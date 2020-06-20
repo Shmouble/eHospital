@@ -21,3 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/administration', 'AdminController@index')->name('administration');
+Route::get('department/{department}', 'DoctorController@index');
+
+Route::resource('doctor', 'DoctorController');
+Route::post('doctor/{doctor}/image', 'DoctorController@image');
