@@ -1,7 +1,11 @@
 @extends('app')
 
 @section('content')
-       
+    <script>
+        var isRoot = {{ (Auth::user()->hasRole('manager.hospital')) }}
+    </script>
+
+
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -19,14 +23,22 @@
             <!-- Карточка доктора -->
             <div class="content">
                 <div class="title m-b-md">
+
+                    @role('root.hospital')
                     <a href="#" id="editImage" data-toggle="modal" data-target="#editImgModal">
                         <img class="img-thumbnail" id="docImg" src="{{ asset('storage/' . $doctor->img_url) }}">
                     </a>
+                    @else
+                        <img class="img-thumbnail" id="docImg" src="{{ asset('storage/' . $doctor->img_url) }}">
+                    @endrole
+
                     <p>
                         <span id="docName"> {{ $doctor->name }} </span>
-                        <a href="#" id="editPencil" data-toggle="modal" data-target="#editDocModal">
-                            <i class="fa fa-pencil"></i>
-                        </a>
+                        @role('root.hospital')
+                            <a href="#" id="editPencil" data-toggle="modal" data-target="#editDocModal">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                        @endrole
                     </p>    
                 </div>
 

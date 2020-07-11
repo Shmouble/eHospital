@@ -20,8 +20,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/administration', 'AdminController@index')->name('administration');
-Route::get('department/{department}', 'DoctorController@index');
+Route::get('/administration', 'AdminController@index')->name('administration')
+    ->middleware('role:root.hospital');
 
+Route::get('department/{department}', 'DoctorController@index');
 Route::resource('doctor', 'DoctorController');
 Route::post('doctor/{doctor}/image', 'DoctorController@image');

@@ -93,6 +93,16 @@
                     renderEvents(calendar, result);
                 }
             });
-        renderEditButtons();
+
+        if(isRoot){
+            renderEditButtons();
+        }
+
+        $(document).on('click','.fc-button', function () {
+            if(isRoot){
+                renderEditButtons();
+            }
+        })
+
     }
 })(jQuery);
