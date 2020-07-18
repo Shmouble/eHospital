@@ -1,12 +1,14 @@
-@extends('app')
+@extends('layouts.app')
 
 @section('content')
+    @auth
     <script>
         var isRoot = {{ (Auth::user()->hasRole('manager.hospital')) }}
     </script>
-
+    @endauth
 
         <div class="flex-center position-ref full-height">
+            <!--
             @if (Route::has('login'))
                 <div class="top-right links">
                 @auth
@@ -20,6 +22,7 @@
                 @endauth
                 </div>
             @endif
+            -->
             <!-- Карточка доктора -->
             <div class="content">
                 <div class="title m-b-md">
@@ -31,6 +34,7 @@
                     @else
                         <img class="img-thumbnail" id="docImg" src="{{ asset('storage/' . $doctor->img_url) }}">
                     @endrole
+
 
                     <p>
                         <span id="docName"> {{ $doctor->name }} </span>

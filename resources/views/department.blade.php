@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 
 @section('content')
 <button type="button" class="btn btn-warning add" data-toggle="modal" data-target="#addDocModal">Добавить доктора</button>
