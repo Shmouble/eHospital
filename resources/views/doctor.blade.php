@@ -124,8 +124,8 @@
                         <form id="addEventForm">
                             <div class="card-body">
                                     <div class="form-group">
-                                        <label for="num_patients"> Количество приемов: </label>
-                                        <input type="number" min=1 max=50 class="form-control" name="num_patients" id="num_patients">
+                                        <label for="num_tickets"> Количество приемов: </label>
+                                        <input type="number" min=1 max=50 class="form-control" name="num_tickets" id="num_tickets">
                                     </div>
 
                                     <div class="form-group">

@@ -19,8 +19,17 @@ class CreateDoctorsTable extends Migration
             $table->string('education');
             $table->string('experience');
             $table->string('img_url')->default('storage/avatar.jpg');
-            $table->integer('department_id');
+            $table->unsignedBigInteger('department_id')->nullable(false);;
+            $table->unsignedBigInteger('user_id')->nullable(false);;
             $table->timestamps();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+            $table->foreign('department_id')
+                ->references('id')
+                ->on('departments')
+                ->onDelete('cascade');
         });
     }
 
