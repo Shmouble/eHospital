@@ -14,7 +14,11 @@
         <p class="card-text">{{ $doctor->education }}</p>
         <p class="card-text">{{ $doctor->experience }}</p>
         <a href="{{ url('doctor/' . $doctor->id) }}" class="btn btn-secondary">Подробнее</a>
-        <button type="button" id='deleteBtn' data-id="{{ $doctor->id }}" class="close deleteBtn" data-toggle="modal" data-target="#deleteModal">Удалить</button>
+
+        @role('root.hospital')
+            <button type="button" id='deleteBtn' data-id="{{ $doctor->id }}" class="close deleteBtn" data-toggle="modal" data-target="#deleteModal">Удалить</button>
+        @endrole
+
       </div>
     </div>
   </div>
