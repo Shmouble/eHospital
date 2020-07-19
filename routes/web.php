@@ -25,3 +25,6 @@ Route::get('department/{department}', 'DoctorController@index');
 
 Route::resource('doctor', 'DoctorController');
 Route::post('doctor/{doctor}/image', 'DoctorController@image');
+Route::get('/cabinet', 'DoctorController@cabinet');
+
+

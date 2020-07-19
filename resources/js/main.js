@@ -60,6 +60,23 @@ $(document).ready(function() {
             $('.btn.delete').remove();
         }
     });
+    //Отображение талонов доктора за конкретный день
+    $(document).on('click', '#openTickets', function(e) {
+        var date = $(this).attr('data-date');
+        var id = $(this).attr('data-id');
+        $('tbody.tickets').empty();
+        $('#classModalLabel').text(date);
+        $.ajax({
+            url: '/api/schedule/' + id + '/doctorstickets',
+            method: 'get',
+            success: function (data) {
+                debugger;
+                for (var param in data) { 
+                    $('tbody.tickets').append('<tr><td>' + data[param].number + '</td><td>' + data[param].time.substr(0,5) + '</td><td>' + data[param].name + ' ' + data[param].surname + '</td></tr>' ); 
+                }
+            }
+        });
+    });
     // Заполнение формы редатирования расписания
     $(document).on('click', '.fc-day-grid-event[data-target="#addEventModal"]', function(e) {
         var date = $(this).parent().attr('data-date');
@@ -81,7 +98,7 @@ $(document).ready(function() {
                 data.endTime = endArray[1].substr(0, 5);
                     $('[name="start"]').val(data.startTime);     
                     $('[name="end"]').val(data.endTime);     
-                    $('[name="num_patients"]').val(data.num_patients);        
+                    $('[name="num_tickets"]').val(data.num_tickets);        
             }
         }); 
     });
@@ -165,7 +182,7 @@ $(document).ready(function() {
                 $('[data-date="' + formData[3].value + '"] a').replaceWith('<a id="' + data.id + '" class="fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable" data-toggle="modal" data-target="#addEventModal">' +
                     '<div class="fc-content">' +
                     '<span class="fc-time">' + formData[1].value + '-' + formData[2].value + '</span>' +
-                    '<span class="fc-title">' + '  Приемов:' + data.num_patients +'</span>' +
+                    '<span class="fc-title">' + '  Приемов:' + data.num_tickets +'</span>' +
                     '</div>' +
                     '</a>');
                 $('#addEventModal').modal('hide');

@@ -41,7 +41,8 @@ class PermissionsAndRolesSeeder extends Seeder
         $role->givePermissionTo('make an appointment');
 
         // Главный root
-        $user = User::create([ 'name' => 'Administrator', 'email' => 'Administrator@gmail.com',
+        $user = User::create([ 
+            'email' => 'Administrator@gmail.com',
             'password' => bcrypt('Administrator')]);
         $user->assignRole('root.hospital');
     }

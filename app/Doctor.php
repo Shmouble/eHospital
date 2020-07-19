@@ -3,7 +3,6 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Schedule;
 
 class Doctor extends Model
 {
@@ -11,6 +10,6 @@ class Doctor extends Model
     
     public function schedules()
     {
-        return $this->hasMany('Schedule');
+        return $this->hasMany('App\Schedule');
     }
 }

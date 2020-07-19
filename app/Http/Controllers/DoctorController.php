@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Doctor;
 use App\Schedule;
 use Redirect,Response;
+use Carbon\Carbon;
 
 class DoctorController extends Controller
 {
@@ -81,6 +82,17 @@ class DoctorController extends Controller
         $doctor->update($update);
         
         return Response::json($doctor);
+    }
+    
+    public function cabinet(Request $request)
+    {
+       $id = $request->user()->id;
+        $nowDate = Carbon::now();
+        $endDate = Carbon::now()->addDays(10);
+        $doctor = Doctor::where('user_id', $id)->first();
+        $schedules = $doctor->schedules()->whereBetween('start', [$nowDate, $endDate])->get()->sortBy('start');
+        
+        return view ('cabinet', compact(['doctor', 'schedules']));
     }
     
     public function image(Request $request, Doctor $doctor)

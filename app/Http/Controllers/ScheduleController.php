@@ -10,7 +10,7 @@ class ScheduleController extends Controller
 {
     public function index($doctor)
     {
-        $data = Schedule::where('doctor_id', $doctor)->get(['id', 'num_patients AS title', 'start', 'end']);
+        $data = Schedule::where('doctor_id', $doctor)->get(['id', 'num_tickets AS title', 'start', 'end']);
 
         return Response::json($data);
     }
@@ -19,7 +19,7 @@ class ScheduleController extends Controller
     {
         $start = new DateTime(($request->date) . ($request->start));
         $end = new DateTime(($request->date) . ($request->end));
-        $insert = [ 'num_patients' => $request->num_patients,
+        $insert = [ 'num_tickets' => $request->num_tickets,
             'start' => $start,
             'end' => $end,
             'doctor_id' => $doctor
@@ -37,7 +37,7 @@ class ScheduleController extends Controller
     {
         $start = new DateTime(($request->date) . ($request->start));
         $end = new DateTime(($request->date) . ($request->end));
-        $update = [ 'num_patients' => $request->num_patients,
+        $update = [ 'num_tickets' => $request->num_tickets,
             'start' => $start,
             'end' => $end,
             ];

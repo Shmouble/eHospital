@@ -19,3 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('doctor/{doctor}/schedule', 'ScheduleController');
+Route::get('doctor/{doctor}/freetickets', 'TicketController@freeTickets');
+Route::get('schedule/{schedule}/doctorstickets', 'TicketController@doctorsTickets');
+Route::get('mytickets', 'TicketController@patientsTickets');
