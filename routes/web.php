@@ -22,6 +22,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/administration', 'AdminController@index')->name('administration')
     ->middleware('role:root.hospital');
+Route::get('/news', 'NewsController@index')->name('news');
+Route::post('/news/add', 'NewsController@AddNews');
 
 Route::get('department/{department}', 'DoctorController@index');
 Route::resource('doctor', 'DoctorController');

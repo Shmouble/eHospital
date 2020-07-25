@@ -229,4 +229,18 @@ $(document).ready(function() {
             });
         }
     });
+    
+    //Добавление новости
+    $('#addNewsForm').on('submit', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: 'news/add',
+            method: 'post',
+            data: $('#addNewsForm').serialize(),
+            success: function (data) {
+                console.log(data);
+            }
+        })
+    })
 });
