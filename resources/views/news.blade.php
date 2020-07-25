@@ -34,7 +34,6 @@
                                 <label for="news_image"> Картинка </label>
                                 <input type="file" class="form-control" name="news_image" id="news_image">
                             </div>
-                            <input type="hidden" name="id">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Закрыть</button>
