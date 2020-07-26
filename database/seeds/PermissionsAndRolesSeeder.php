@@ -45,5 +45,10 @@ class PermissionsAndRolesSeeder extends Seeder
             'email' => 'Administrator@gmail.com',
             'password' => bcrypt('Administrator')]);
         $user->assignRole('root.hospital');
+        // Пробный доктор
+        $doctor = User::create([ 
+            'email' => '654@gmail.com',
+            'password' => bcrypt('12345678')]);
+        $doctor->assignRole('doctor.hospital');
     }
 }

@@ -13,11 +13,12 @@ class TicketController extends Controller
 {
     public function patientsTickets(Request $request)
     {
-        $id = $request->user()->id;
-        
-        $tickets = Patient::where('patients.user_id', $id)->join('tickets','tickets.patient_id', '=', 'patients.id' )->join('schedules','tickets.schedule_id', '=', 'schedules.id' )->join('doctors', 'doctors.id', '=', 'schedules.doctor_id')->select('tickets.number','tickets.time', 'doctors.name')->get();
+       // $id = $request->user()->id;
+       $id = 3; 
+        $patient = Patient::where('patients.user_id', $id)->first();
+        $tickets = Patient::where('patients.user_id', $id)->join('tickets','tickets.patient_id', '=', 'patients.id' )->join('schedules','tickets.schedule_id', '=', 'schedules.id' )->join('doctors', 'doctors.id', '=', 'schedules.doctor_id')->select('tickets.id','tickets.number','schedules.start', 'tickets.time', 'doctors.name as doctor_name', 'doctors.id as doctor_id')->get();
 
-        return Response::json($tickets);
+        return view ('profile', compact(['tickets', 'patient']))->with('title', 'My profile');
     } 
     
     public function doctorsTickets(Request $request, $schedule)
@@ -69,9 +70,25 @@ class TicketController extends Controller
        return Response::json($tickets);
     }
     
-    public function destroy(Request $request, $doctor, Schedule $schedule)
+    public function numberOfFreeTickets($doctor)
     {
-        $schedule->delete();
-        return Response::json($schedule);
+        
+        $tickets = [];
+        $nowDate = Carbon::now();
+        $schedules = Schedule::where('start', '>=', $nowDate)->where('doctor_id', $doctor)->get()->sortBy('start');
+        foreach ($schedules as $schedule){
+            $date = Carbon::parse($schedule->start)->format('Y-m-d');
+            $numberOfAllTickets = $schedule->num_tickets;
+            $numberOfTakenTickets = Ticket::where('schedule_id', $schedule->id)->get()->count();
+            $numberOfFreeTickets = $numberOfAllTickets - $numberOfTakenTickets;
+            $tickets[$date] = $numberOfFreeTickets;
+        }
+       return Response::json($tickets);
+    }
+    
+    public function destroy(Request $request, Ticket $ticket)
+    {
+        $ticket->delete();
+        return Response::json($ticket);
     }
 }

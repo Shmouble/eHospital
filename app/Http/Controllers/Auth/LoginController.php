@@ -36,6 +36,8 @@ class LoginController extends Controller
         if($user = Auth::user()){
             if($user->hasRole('root.hospital')){
                 return "administration";
+            } else if($user->hasRole('doctor.hospital')){
+                return "cabinet";
             } else {
                 return "welcome";
             }

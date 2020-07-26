@@ -1,3 +1,4 @@
+var isRoot = false;
 var FullCalendar = require('@fullcalendar/core');
 var FullCalendarDayGrid = require('@fullcalendar/daygrid');
 
@@ -18,9 +19,17 @@ if (calendarEl){
     });
 
     calendar.render();
-
+    
+    var eventsUrl = '';
+    
+    if(isRoot){
+       eventsUrl = 'http://' + x + '/api' + path + '/schedule'; 
+    } else {
+       eventsUrl = 'http://' + x + '/api' + path + '/numberoffreetickets';  
+    }
+console.log(eventsUrl);
     $('#calendar').fullCalendarExtension({
-        eventsUrl: 'http://' + x + '/api' + path + '/schedule',
+        eventsUrl: eventsUrl,
     });
 }
 
@@ -194,6 +203,23 @@ $(document).ready(function() {
     $(document).on('click', '#deleteBtn', function(e) {
         var id = $(this).data('id');
         $('.confirm').attr('data-id', id);
+    });
+    // Удаления заказанного талона
+    $(document).on('click', '#deleteTickets', function(e) {
+        var id = $(this).data('id');
+        bootbox.confirm("Вы уверены что хотите отказаться от талона?", function(result){ 
+    if (result) {
+       $.ajax({
+            url: 'http://' + x + 'api/ticket/' + id,
+            type: 'delete',
+            success: function (data) {
+                if(data){
+                    $('tr#' + id).remove();
+                }
+            }
+        });   
+    }
+});
     });
     //Удаление доктора
     $(document).on('click', '.confirm', function(e) {

@@ -3,6 +3,7 @@
         var calendar = $(this);
         var config = $.extend({}, {}, options);
         var currentDate = new Date();
+        var isRoot = false;
         var afterTomorrowDate = new Date(currentDate);
             afterTomorrowDate.setDate(afterTomorrowDate.getDate() + 2);
             afterTomorrowDate.setHours(0, 0, 0, 0);
@@ -25,6 +26,27 @@
                 if (cellDate >= afterTomorrowDate) {
                     $(event).html(
                         '<a class="btn btn-outline-dark editBtn" href="#" role="button" data-toggle="modal" data-target="#addEventModal" data-date="' + $(event).data('date') + '">Edit</a>'
+                    );
+                }
+            });
+        }
+        
+        function renderFreeTickets(result) {
+            var calendarDays = calendar.find('.fc-bg tbody td.fc-widget-content');
+           
+            $.each(calendarDays, function (key, event) {
+                var cellDate = $(event).data('date');
+
+                if (result.hasOwnProperty(cellDate)) {
+                    
+                    $('[data-date="' + cellDate +'"].fc-widget-content').html(
+                        
+                        '<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable">' +
+                        '<div class="fc-content">' +
+                        '<span class="fc-time">' + result[cellDate] + '</span>' +
+                        '<span class="fc-title">' + 'свободных талонов' + '</span>' +
+                        '</div>' +
+                        '</a>'
                     );
                 }
             });
@@ -86,11 +108,16 @@
 
             $('[data-date="' + date +'"].fc-widget-content').html(eventsHtml.join(''));
         }
-        $.get(config.eventsUrl)
+        
+            $.get(config.eventsUrl)
             .then(function (result) {
+                renderFreeTickets(result);
                 if (result !== null && result.length) {
-
-                    renderEvents(calendar, result);
+//                    if(isRoot){
+//                        renderEvents(calendar, result);
+//                    } else {
+                        
+//                    }
                 }
             });
 

@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+@role('root.hospital')
 <button type="button" class="btn btn-warning add" data-toggle="modal" data-target="#addDocModal">Добавить доктора</button>
 <div class="row">
-
+@endrole
  @foreach($doctors as $doctor)
   <div class="col-sm-3" data-id="{{ $doctor->id }}">
     <div class="card">

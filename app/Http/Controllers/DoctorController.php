@@ -18,7 +18,7 @@ class DoctorController extends Controller
     public function index($department)
     {
         $doctors = Doctor::where('department_id', $department)->get(['id', 'name', 'education', 'experience', 'img_url']);
-        return view ('department', compact(['doctors', 'department']));
+        return view ('department', compact(['doctors', 'department']))->with('title', 'Отделения');
     }
 
     /**
@@ -49,7 +49,7 @@ class DoctorController extends Controller
      */
     public function show(Doctor $doctor)
     {
-        return view ('doctor', compact('doctor'));
+        return view ('doctor', compact('doctor'))->with('title', $doctor->name);
     }
 
     /**

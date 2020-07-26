@@ -1,36 +1,26 @@
-@extends('app')
+@extends('layouts.app')
 
 @section('content')
        
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                @auth
-                    <a href="{{ url('/home') }}">Home</a>
-                @else
-                    <a href="{{ route('login') }}">Login</a>
+        
+            <div class="row about">
+   <div class="col-lg-4 col-md-4 col-sm-12">            
+        <img class="img-thumbnail" id="docImg" src="{{ asset('storage/' . $doctor->img_url) }}">
+   </div>
+   <div class="col-lg-8 col-md-8 col-sm-12 desc">
+     
+    <h3 id="docName"> {{ $doctor->name }} </h3>
+    @role('root.hospital')
+                            <a href="#" id="editPencil" data-toggle="modal" data-target="#editDocModal">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                        @endrole
+    <p id="docEducation" >Образование: {{ $doctor->education }} </p><br>
+    <p id="docExperience">Опыт работы: {{ $doctor->experience }} </p>
+   </div>
+  </div>
 
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}">Register</a>
-                    @endif
-                @endauth
-                </div>
-            @endif
-            <!-- Карточка доктора -->
-            <div class="content">
-                <div class="title m-b-md">
-                    <img class="img-thumbnail" id="docImg" src="{{ asset('storage/' . ($doctor->img_url ?? '')) }}">
-                    <p>
-                        <span id="docName"> {{ $doctor->name ?? '' }} </span>
-                    </p>    
-                </div>
-
-                <div class="links">
-                    <p id="docEducation" >Образование: {{ $doctor->education ?? ''}} </p><br>
-                    <p id="docExperience">Опыт работы: {{ $doctor->experience ?? ''}} </p>
-                </div>
-
-               <table class="table table-hover"><h3>Расписание</h3>
+    <table class="table table-hover"><h3>Расписание</h3>
   <thead>
     <tr>
       <th scope="col">Дата</th>

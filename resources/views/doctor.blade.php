@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    @auth
+    
+@auth
     <script>
-        var isRoot = {{ (Auth::user()->hasRole('manager.hospital')) }}
+        var isRoot = {{ (Auth::user()->hasRole('manager.hospital')) }}; 
     </script>
-    @endauth
-
-        <div class="flex-center position-ref full-height">
+@endauth
+<!--        <div class="flex-center position-ref full-height">-->
             <!--
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -24,34 +24,30 @@
             @endif
             -->
             <!-- Карточка доктора -->
-            <div class="content">
-                <div class="title m-b-md">
 
-                    @role('root.hospital')
+<div class="row about">
+   <div class="col-lg-4 col-md-4 col-sm-12">
+    @role('root.hospital')
                     <a href="#" id="editImage" data-toggle="modal" data-target="#editImgModal">
                         <img class="img-thumbnail" id="docImg" src="{{ asset('storage/' . $doctor->img_url) }}">
                     </a>
                     @else
                         <img class="img-thumbnail" id="docImg" src="{{ asset('storage/' . $doctor->img_url) }}">
                     @endrole
-
-
-                    <p>
-                        <span id="docName"> {{ $doctor->name }} </span>
-                        @role('root.hospital')
+   </div>
+   <div class="col-lg-8 col-md-8 col-sm-12 desc">
+     
+    <h3 id="docName"> {{ $doctor->name }} </h3>
+    @role('root.hospital')
                             <a href="#" id="editPencil" data-toggle="modal" data-target="#editDocModal">
                                 <i class="fa fa-pencil"></i>
                             </a>
                         @endrole
-                    </p>    
-                </div>
+    <p id="docEducation" >Образование: {{ $doctor->education }} </p><br>
+    <p id="docExperience">Опыт работы: {{ $doctor->experience }} </p>
+   </div>
+  </div>
 
-                <div class="links">
-                    <p id="docEducation" >Образование: {{ $doctor->education }} </p><br>
-                    <p id="docExperience">Опыт работы: {{ $doctor->experience }} </p>
-                </div>
-            </div>
-        </div>
         <!-- Календарь -->
         <div id='calendar'></div>
         <!-- Модальное окно для редактирования инфо о докторе -->
