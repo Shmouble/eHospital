@@ -61564,12 +61564,16 @@ $(document).ready(function () {
 
   $('#addNewsForm').on('submit', function (e) {
     e.preventDefault();
+    var formData = new FormData($(this)[0]);
     $.ajax({
       url: 'news/add',
       method: 'post',
-      data: $('#addNewsForm').serialize(),
+      data: formData,
+      cache: false,
+      contentType: false,
+      processData: false,
       success: function success(data) {
-        console.log(data);
+        $('#addNewsModal').modal('hide');
       }
     });
   });

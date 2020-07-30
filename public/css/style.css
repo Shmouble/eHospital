@@ -56,3 +56,24 @@
 .textField {
     resize: none;
 }
+
+#newsHolder{
+    padding: 15px 30px 15px 30px;
+    text-align: center;
+}
+
+.oneNews{
+    text-align: left;
+    display: inline-block;
+    width: 320px;
+    height: 400px;
+    background-color: white;
+    padding: 10px;
+    margin: 6px 25px 6px 0;
+    border: 1px solid grey;
+    border-radius: 5px;
+}
+
+.newsButton{
+    vertical-align: bottom;
+}

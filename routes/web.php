@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +27,8 @@ Route::get('/administration', 'AdminController@index')->name('administration')
 Route::get('/news', 'NewsController@index')->name('news');
 Route::post('/news/add', 'NewsController@AddNews');
 
+
 Route::get('department/{department}', 'DoctorController@index');
 Route::resource('doctor', 'DoctorController');
 Route::post('doctor/{doctor}/image', 'DoctorController@image');
 Route::get('/cabinet', 'DoctorController@cabinet');
-
-
