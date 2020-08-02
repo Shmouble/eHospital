@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use App\News;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller
 {
     function index(){
-        $allNews = News::paginate(10);
+        $allNews = DB::table('news')->latest('created_at')->paginate(10);
         return view('news', compact('allNews'));
     }
 
@@ -19,13 +19,14 @@ class NewsController extends Controller
         $request->validate([
             'news_title' => 'required',
             'news_text' => 'required',
+            'news_description' => 'required',
             'news_image' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
         $pathToImage = $request->file('news_image')->store('news_images', 'public');
 
         $newsData = $request->all();
         $newsData['news_image'] = $pathToImage;
-        $newsData['date'] = Carbon::now();//->format('d.m.Y');
+        $newsData['date'] = Carbon::now()->format('d.m.Y');
 
         $news = News::create($newsData);
 

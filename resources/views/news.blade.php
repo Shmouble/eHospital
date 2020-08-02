@@ -2,10 +2,10 @@
 
 @section('content')
 
-    @role('root.manager')
+    @role('manager.hospital')
     <div class="stuff">
         <a href="#" id="addNews" data-toggle="modal" data-target="#addNewsModal">
-            <h4>Add News</h4>
+            <h4>Добавить новость</h4>
         </a>
     </div>
     @endrole
@@ -13,16 +13,14 @@
     <div id="newsHolder">
         @foreach($allNews as $news)
             <div class="oneNews" data-id="{{ $news->id }}">
-                    <div class="newsBody">
-                        <h4 class="newsTitle">{{ $news->news_title }}</h4>
-                        <p class="newsDate">{{ \Carbon\Carbon::parse($news->date)->format('d.m.Y') }}</p>
-                        <p class="newsDescription">{{ $news->news_description }}</p>
-                        <div class="newsImage">
-                            <img src="{{ asset('storage/' . $news->news_image) }}" alt='News image'>
-                        </div>
-                        <p class="newsText">{{ Str::limit($news->news_text, 300)  }}</p>
-                        <a href="{{ url('news/read/' . $news->id) }}" class="btn btn-secondary newsButton">Подробнее</a>
-                    </div>
+                <h4 class="newsTitle">{{ $news->news_title }}</h4>
+                <p class="newsDate">{{ \Carbon\Carbon::parse($news->date)->format('d.m.Y') }}</p>
+                <p class="newsDescription">{{ $news->news_description }}</p>
+                <div class="newsImage">
+                    <img src="{{ asset('storage/' . $news->news_image) }}" alt='News image'>
+                </div>
+                <p class="newsText">{{ Str::limit($news->news_text, 300)  }}</p>
+                <a href="{{ url('news/read/' . $news->id) }}" class="btn btn-secondary newsButton">Подробнее</a>
             </div>
         @endforeach
     </div>
@@ -43,11 +41,11 @@
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="news_title"> Заголовок: </label>
-                                <input type="text" class="form-control" name="news_title" id="news_title" maxlength="80" required>
+                                <input type="text" class="form-control" name="news_title" id="news_title" maxlength="33" required>
                             </div>
                             <div class="form-group">
-                                <label for="news_title"> Описание: </label>
-                                <input type="text" class="form-control" name="news_description" id="news_description" maxlength="80" required>
+                                <label for="news_description"> Описание: </label>
+                                <input type="text" class="form-control" name="news_description" id="news_description" maxlength="33" required>
                             </div>
                             <div class="form-group">
                                 <label for="news_text"> Текст: </label>

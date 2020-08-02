@@ -61573,6 +61573,7 @@ $(document).ready(function () {
       contentType: false,
       processData: false,
       success: function success(data) {
+        $("#newsHolder").prepend('<div class="oneNews" data-id="' + data.id + '">' + '<h4 class="newsTitle">' + data.news_title + '</h4>' + '<p class="newsDate">' + data.date + '</p>' + '<p class="newsDescription">' + data.news_description + '</p>' + '<div class="newsImage">' + '<img src="' + 'storage/' + data.news_image + '" alt="News image">' + '</div>' + '<p class="newsText">' + data.news_text.substring(0, 300) + '...' + '</p>' + '<a href="' + 'news/read/' + data.id + '" class="btn btn-secondary newsButton">Подробнее</a>' + '</div>');
         $('#addNewsModal').modal('hide');
       }
     });
