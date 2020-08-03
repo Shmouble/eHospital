@@ -244,7 +244,7 @@ $(document).ready(function() {
             success: function (data) {
                 $("#newsHolder").prepend('<div class="oneNews" data-id="' + data.id + '">' +
                     '<h4 class="newsTitle">' + data.news_title + '</h4>' +
-                    '<p class="newsDate">' + data.date + '</p>' +
+                    '<p class="newsDate">' + makeDate(data.date) + '</p>' +
                     '<p class="newsDescription">' + data.news_description + '</p>' +
                     '<div class="newsImage">' +
                     '<img src="' + 'storage/' + data.news_image + '" alt="News image">' +
@@ -257,5 +257,13 @@ $(document).ready(function() {
                 $('#addNewsModal').modal('hide');
             }
         })
-    })
+    });
+
+    function makeDate(currentDate){
+        currentDate = currentDate.substr(0, 10);
+        let arrayDate = currentDate.split('-');
+        currentDate = arrayDate[2] + '.' + arrayDate[1] + '.' + arrayDate[0];
+
+        return currentDate;
+    }
 });

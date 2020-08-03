@@ -26,6 +26,7 @@ Route::get('/administration', 'AdminController@index')->name('administration')
     ->middleware('role:root.hospital');
 Route::get('/news', 'NewsController@index')->name('news');
 Route::post('/news/add', 'NewsController@AddNews');
+Route::get('/news/read/{id}', 'NewsController@readNews')->name('read');
 
 
 Route::get('department/{department}', 'DoctorController@index');

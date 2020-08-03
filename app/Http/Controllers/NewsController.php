@@ -26,10 +26,20 @@ class NewsController extends Controller
 
         $newsData = $request->all();
         $newsData['news_image'] = $pathToImage;
-        $newsData['date'] = Carbon::now()->format('d.m.Y');
+        $newsData['date'] = Carbon::now();//->format('d.m.Y');
 
         $news = News::create($newsData);
 
         return Response::json($news);
+    }
+
+    function readNews($id){
+        $news = DB::table('news')->find($id);
+
+        if($news){
+            return view('readNews', compact('news'));
+        }
+
+        return abort(404);
     }
 }

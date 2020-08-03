@@ -144,3 +144,18 @@ html, body {
     left: 50%;
     transform: translate(-50%, 0)
 }
+
+#newsContent{
+    width: 60%;
+    margin: auto;
+}
+
+.newsContentImage{
+    width: 500px;
+    height: 500px;
+}
+
+.newsContentImage > img {
+    max-width: 100%;
+    height: auto;
+}
