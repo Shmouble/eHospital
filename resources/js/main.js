@@ -229,4 +229,41 @@ $(document).ready(function() {
             });
         }
     });
+    
+    //Добавление новости
+    $('#addNewsForm').on('submit', function (e) {
+        e.preventDefault();
+        var formData = new FormData($(this)[0]);
+        $.ajax({
+            url: 'news/add',
+            method: 'post',
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                $("#newsHolder").prepend('<div class="oneNews" data-id="' + data.id + '">' +
+                    '<h4 class="newsTitle">' + data.news_title + '</h4>' +
+                    '<p class="newsDate">' + makeDate(data.date) + '</p>' +
+                    '<p class="newsDescription">' + data.news_description + '</p>' +
+                    '<div class="newsImage">' +
+                    '<img src="' + 'storage/' + data.news_image + '" alt="News image">' +
+                    '</div>' +
+                    '<p class="newsText">' + data.news_text.substring(0, 300) + '...' +  '</p>' +
+                    '<a href="' + 'news/read/' + data.id + '" class="btn btn-secondary newsButton">Подробнее</a>' +
+                    '</div>'
+                );
+
+                $('#addNewsModal').modal('hide');
+            }
+        })
+    });
+
+    function makeDate(currentDate){
+        currentDate = currentDate.substr(0, 10);
+        let arrayDate = currentDate.split('-');
+        currentDate = arrayDate[2] + '.' + arrayDate[1] + '.' + arrayDate[0];
+
+        return currentDate;
+    }
 });
