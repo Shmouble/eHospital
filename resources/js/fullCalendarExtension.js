@@ -33,7 +33,7 @@
         
         function renderFreeTickets(result) {
             var calendarDays = calendar.find('.fc-bg tbody td.fc-widget-content');
-           
+
             $.each(calendarDays, function (key, event) {
                 var cellDate = $(event).data('date');
 
@@ -41,10 +41,10 @@
                     
                     $('[data-date="' + cellDate +'"].fc-widget-content').html(
                         
-                        '<a class="fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable">' +
+                        '<a data-id=' + result[cellDate].id +' class="fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable freeTick" data-toggle="modal" data-target="#freeTickModal">' +
                         '<div class="fc-content">' +
-                        '<span class="fc-time">' + result[cellDate] + '</span>' +
-                        '<span class="fc-title">' + 'свободных талонов' + '</span>' +
+                        '<span class="fc-time">' + result[cellDate].number + '</span>' +
+                        '<span class="fc-title">' + ' свободных талонов' + '</span>' +
                         '</div>' +
                         '</a>'
                     );

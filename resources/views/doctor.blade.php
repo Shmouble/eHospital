@@ -4,25 +4,9 @@
     
 @auth
     <script>
-        var isRoot = {{ (Auth::user()->hasRole('manager.hospital')) }}; 
+        //var isRoot = {{ (Auth::user()->hasRole('manager.hospital')) }}; 
     </script>
 @endauth
-<!--        <div class="flex-center position-ref full-height">-->
-            <!--
-            @if (Route::has('login'))
-                <div class="top-right links">
-                @auth
-                    <a href="{{ url('/home') }}">Home</a>
-                @else
-                    <a href="{{ route('login') }}">Login</a>
-
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}">Register</a>
-                    @endif
-                @endauth
-                </div>
-            @endif
-            -->
             <!-- Карточка доктора -->
 
 <div class="row about">
@@ -47,7 +31,11 @@
     <p id="docExperience">Опыт работы: {{ $doctor->experience }} </p>
    </div>
   </div>
-
+  @if (!Auth::check()) 
+<div class="alert alert-danger" role="alert">
+  Пожалуйста, для заказа талона авторизуйтесь!
+</div>
+       @endif
         <!-- Календарь -->
         <div id='calendar'></div>
         <!-- Модальное окно для редактирования инфо о докторе -->
@@ -79,6 +67,32 @@
                                 <input type="submit" class="btn btn-primary" id="doc-update" value="Сохранить">
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Модальное окно для вывода свободных талонов -->
+        <div class="modal fade" id="freeTickModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"></h4>
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-responsive">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Номер талона</th>
+                                        <th>Время</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="freetickets">
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

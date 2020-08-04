@@ -29,26 +29,26 @@ class TicketController extends Controller
         return Response::json($tickets);
     }
     
-    public function store(Request $request, $doctor)
+    public function store(Request $request, $schedule)
     {
-        $start = new DateTime(($request->date) . ($request->start));
-        $end = new DateTime(($request->date) . ($request->end));
-        $insert = [ 'num_tickets' => $request->num_tickets,
-            'start' => $start,
-            'end' => $end,
-            'doctor_id' => $doctor
+        //$id = $request->user()->id;
+        $id = 3;
+        $patient = Patient::where('patients.user_id', $id)->first();
+        $insert = [ 'number' => $request->number,
+            'time' => $request->time,
+            'schedule_id' => $schedule,
+            'patient_id' => $patient->id
             ];
-        $schedule = Schedule::create($insert);
-        return Response::json($schedule);
+        $ticket = Ticket::create($insert);
+        return Response::json($ticket);
     }
     
-    public function freeTickets($doctor)
+    public function freeTickets(Schedule $schedule)
     {
         
         $tickets = [];
         $nowDate = Carbon::now();
-        $schedules = Schedule::where('start', '>', $nowDate)->where('doctor_id', $doctor)->get()->sortBy('start');
-        foreach ($schedules as $schedule){
+        
             $start = Carbon::parse($schedule->start);
             $end = Carbon::parse($schedule->end);
             $numTickets = $schedule->num_tickets;
@@ -66,7 +66,6 @@ class TicketController extends Controller
                     unset($tickets[$takenTicket->number]);
                 }
             }
-        }
        return Response::json($tickets);
     }
     
@@ -81,7 +80,7 @@ class TicketController extends Controller
             $numberOfAllTickets = $schedule->num_tickets;
             $numberOfTakenTickets = Ticket::where('schedule_id', $schedule->id)->get()->count();
             $numberOfFreeTickets = $numberOfAllTickets - $numberOfTakenTickets;
-            $tickets[$date] = $numberOfFreeTickets;
+            $tickets[$date] = ['number' => $numberOfFreeTickets,'id' => $schedule->id];
         }
        return Response::json($tickets);
     }

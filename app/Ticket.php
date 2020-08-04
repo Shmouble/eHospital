@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
 {
+    protected $guarded = ['id'];
+    
     public function patient()
     {
         return $this->belongsTo('App\Patient');

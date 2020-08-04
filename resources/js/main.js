@@ -27,7 +27,7 @@ if (calendarEl){
     } else {
        eventsUrl = 'http://' + x + '/api' + path + '/numberoffreetickets';  
     }
-console.log(eventsUrl);
+
     $('#calendar').fullCalendarExtension({
         eventsUrl: eventsUrl,
     });
@@ -208,18 +208,58 @@ $(document).ready(function() {
     $(document).on('click', '#deleteTickets', function(e) {
         var id = $(this).data('id');
         bootbox.confirm("Вы уверены что хотите отказаться от талона?", function(result){ 
-    if (result) {
-       $.ajax({
-            url: 'http://' + x + 'api/ticket/' + id,
-            type: 'delete',
+            if (result) {
+               $.ajax({
+                    url: 'http://' + x + 'api/ticket/' + id,
+                    type: 'delete',
+                    success: function (data) {
+                        if(data){
+                            $('tr#' + id).remove();
+                        }
+                    }
+                });   
+            }
+        });
+    });
+    // Вывод талонов для заказа
+    $(document).on('click', '.freeTick', function(e) {
+        var id = $(this).data('id');
+        var date = $(this).parent().data('date');
+        $('#freetickets').empty();
+        $.ajax({
+            url: 'http://' + x + '/api/schedule/' + id + '/freetickets',
+            type: 'get',
+            success: function (tickData) {
+                for (var number in tickData) {
+                    $('#freeTickModal .modal-title').text(date);
+                    $('#freetickets').append('<tr><td>' + number + '</td><td>' + tickData[number] + '</td><td>' + '<a class="btn btn-outline-dark orderTick" href="#" data-scheduleid=' + id + ' role="button">Заказать</a></td></tr>' ); 
+                }      
+            }
+        });
+    });
+    // Заказ талонов
+    $(document).on('click', '.orderTick', function(e) {
+        e.preventDefault();
+        var time = $(this).parent().prev().text();
+        var number = $(this).parent().prev().prev().text();
+        var id = $(this).data('scheduleid');
+        var date = $('#freeTickModal .modal-title').text();
+        var freeTickets = $('[data-date="' + date +'"].fc-widget-content .fc-time').text();
+        $.ajax({
+            url: 'http://' + x + '/api/schedule/' + id + '/store',
+            type: 'post',
+            data: { number: number,
+                    time: time
+                  },
             success: function (data) {
-                if(data){
-                    $('tr#' + id).remove();
-                }
+                $('#freeTickModal').modal('hide');
+                $('[data-date="' + date +'"].fc-widget-content .fc-time').text(freeTickets-1);
+                bootbox.alert({
+                    message: "Талон успешно заказан!",
+                    backdrop: true
+                });
             }
         });   
-    }
-});
     });
     //Удаление доктора
     $(document).on('click', '.confirm', function(e) {
