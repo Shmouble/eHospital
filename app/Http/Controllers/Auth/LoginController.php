@@ -39,7 +39,7 @@ class LoginController extends Controller
             } else if($user->hasRole('doctor.hospital')){
                 return "cabinet";
             } else {
-                return "welcome";
+                return "/";
             }
         } else {
             return "login";

@@ -8,9 +8,13 @@ use Illuminate\Http\Request;
 use Redirect,Response;
 use DateTime;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class TicketController extends Controller
 {
+    use AuthenticatesUsers;
+    
     public function patientsTickets(Request $request)
     {
        // $id = $request->user()->id;
@@ -31,16 +35,16 @@ class TicketController extends Controller
     
     public function store(Request $request, $schedule)
     {
-        //$id = $request->user()->id;
-        $id = 3;
-        $patient = Patient::where('patients.user_id', $id)->first();
-        $insert = [ 'number' => $request->number,
-            'time' => $request->time,
-            'schedule_id' => $schedule,
-            'patient_id' => $patient->id
-            ];
-        $ticket = Ticket::create($insert);
-        return Response::json($ticket);
+        $id = Auth::id();
+        //$id = 3;
+//        $patient = Patient::where('patients.user_id', $id)->first();
+//        $insert = [ 'number' => $request->number,
+//            'time' => $request->time,
+//            'schedule_id' => $schedule,
+//            'patient_id' => $patient->id
+//            ];
+//        $ticket = Ticket::create($insert);
+        return Response::json($id);
     }
     
     public function freeTickets(Schedule $schedule)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Doctor;
 use App\Schedule;
+use App\Department;
 use Redirect,Response;
 use Carbon\Carbon;
 
@@ -15,10 +16,10 @@ class DoctorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($department)
+    public function index(Department $department)
     {
-        $doctors = Doctor::where('department_id', $department)->get(['id', 'name', 'education', 'experience', 'img_url']);
-        return view ('department', compact(['doctors', 'department']))->with('title', 'Отделения');
+        $doctors = Doctor::where('department_id', $department->id)->get(['id', 'name', 'education', 'experience', 'img_url']);
+        return view ('department', compact(['doctors', 'department']))->with('title', $department->name);
     }
 
     /**

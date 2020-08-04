@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<h4>{{ $department->name }}</h4>
 @role('root.hospital')
 <button type="button" class="btn btn-warning add" data-toggle="modal" data-target="#addDocModal">Добавить доктора</button>
 <div class="row">
@@ -67,7 +68,7 @@
                             <label for="experience"> Опыт работы: </label>
                             <input type="text" class="form-control" name="experience" id="experience">
                         </div>
-                        <input type="hidden" id="department_id" name="department_id" value="{{ $department }}">
+                        <input type="hidden" id="department_id" name="department_id" value="{{ $department->id }}">
                     </div>
                     <div class="modal-footer">
                         <input type="submit" class="btn btn-primary" id="doc-create" value="Сохранить">

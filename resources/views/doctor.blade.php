@@ -29,6 +29,7 @@
                         @endrole
     <p id="docEducation" >Образование: {{ $doctor->education }} </p><br>
     <p id="docExperience">Опыт работы: {{ $doctor->experience }} </p>
+    <p></p>
    </div>
   </div>
   @if (!Auth::check()) 

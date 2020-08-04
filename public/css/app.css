@@ -1206,11 +1206,10 @@ Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
     border: none;
 }
 html, body {
-    background-color: #fff;
     color: #636b6f;
     font-family: 'Nunito', sans-serif;
     font-weight: 200;
-    height: 100vh;
+/*    height: 100vh;*/
 }
 
 .full-height {
@@ -1299,6 +1298,183 @@ cursor: default;
 }
 #calendar{
     margin: 0 5%;
+}.footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 5px;
+    background-color: #fff;
+    box-shadow: 0 -1px 7px 1px rgba(0,0,0,0.25);
+}html, body {
+    /*background-color: #fff;
+    color: #636b6f;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+    margin: 0;*/
+    min-height: 100%;
+    background-color: rgb(235, 242, 255);
+}
+
+#app{
+    position: relative;
+    min-height: 100vh;
+}
+
+.py-4 {
+    padding-bottom: 2.5rem !important;
+}
+
+.full-height {
+    height: 100vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+    min-width: 950px;
+}
+
+.title {
+    font-size: 84px;
+}
+
+.links > a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+.stuff{
+    margin: 0 0 10px 20px;
+}
+
+.textField {
+    resize: none;
+}
+
+#newsHolder{
+    padding: 15px 30px 15px 30px;
+    text-align: center;
+}
+
+.newsImage{
+    width: 50%;
+    height: 200px;
+    display: inline-block;
+    
+}
+.oneNews .newsText{
+    width: 40%;
+    display: inline-block;
+}
+
+.newsImage > img {
+    max-width: 100%;
+    height: 200px;
+}
+
+.oneNews{
+    text-align: left;
+    display: block;
+    min-width: 950px;
+    background-color: white;
+    padding: 10px;
+    margin: 6px 25px 15px 0;
+    border: 1px solid rgba(128, 128, 128, 0.48);
+    border-radius: 5px;
+}
+
+.newsButton{
+    vertical-align: bottom;
+}
+
+.oneNews .newsButton{
+    margin-top: 10px;
+}
+
+#latestNews{
+    width: 85%;
+    margin: 0 auto 0 auto;
+    text-align: left;
+    padding: 10px;
+}
+
+#newsRow{
+    width: 100%;
+}
+
+#latestNewsRow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.oneLatestNews{
+    display: inline-block;
+    background-color: white;
+    margin: 0 5px 0 5px;
+    padding: 5px;
+    border: 1px solid #c2c2c2;
+    border-radius: 3px;
+    width: 240px;
+    height: 350px;
+    text-align: center;
+    position: relative;
+}
+.latestNewsImage{
+    width: 100%;
+    height: 120px;
+}
+
+.latestNewsImage > img {
+    max-width: 100%;
+    height: auto;
+}
+
+.oneLatestNews > a{
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translate(-50%, 0)
+}
+
+#newsContent{
+    width: 60%;
+    margin: auto;
+}
+
+.newsContentImage{
+    width: 100%;
+    height: 500px;
+}
+
+.newsContentImage > img {
+    max-width: 100%;
+    height: auto;
 }@charset "UTF-8";
 
 /*!

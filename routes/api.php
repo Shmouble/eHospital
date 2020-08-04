@@ -19,10 +19,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('doctor/{doctor}/schedule', 'ScheduleController');
-Route::get('doctor/{doctor}/freetickets', 'TicketController@freeTickets');
+
 Route::get('doctor/{doctor}/numberoffreetickets', 'TicketController@numberOfFreeTickets');
+//Route::group(['middleware' => 'auth:api'], function(){
 Route::get('schedule/{schedule}/doctorstickets', 'TicketController@doctorsTickets');
 Route::get('schedule/{schedule}/freetickets', 'TicketController@freeTickets');
 Route::post('schedule/{schedule}/store', 'TicketController@store');
 Route::delete('/ticket/{ticket}', 'TicketController@destroy');
+//});
 
