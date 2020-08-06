@@ -24,6 +24,10 @@ class HomeController extends Controller
     public function index()
     {
         $latestNews = DB::table('news')->latest('created_at')->limit(4)->get();
-        return view('welcome', compact('latestNews'));
+        $departments = DB::table('departments')->get();
+        return view('welcome', [
+            'latestNews' => $latestNews,
+            'departments' => $departments
+        ]);
     }
 }
