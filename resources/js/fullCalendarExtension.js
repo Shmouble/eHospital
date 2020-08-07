@@ -3,7 +3,6 @@
         var calendar = $(this);
         var config = $.extend({}, {}, options);
         var currentDate = new Date();
-        var isRoot = false;
         var afterTomorrowDate = new Date(currentDate);
             afterTomorrowDate.setDate(afterTomorrowDate.getDate() + 2);
             afterTomorrowDate.setHours(0, 0, 0, 0);
@@ -12,9 +11,6 @@
             console.log('add url with events json');
             return;
         }
-
-        
-        
 
         function renderEditButtons() {
             var calendarDays = calendar.find('.fc-bg tbody td.fc-widget-content');
@@ -111,22 +107,22 @@
         
             $.get(config.eventsUrl)
             .then(function (result) {
-                renderFreeTickets(result);
-                if (result !== null && result.length) {
-//                    if(isRoot){
-//                        renderEvents(calendar, result);
-//                    } else {
-                        
-//                    }
+                if(isManager){
+                    renderEvents(calendar, result);
+                } else {
+                    renderFreeTickets(result);
+                    if(!isPatient){
+                        $('[data-target="#freeTickModal"]').removeAttr("data-toggle");
+                    }
                 }
             });
 
-        if(isRoot){
+        if(isManager){
             renderEditButtons();
         }
 
         $(document).on('click','.fc-button', function () {
-            if(isRoot){
+            if(isManager){
                 renderEditButtons();
             }
         })

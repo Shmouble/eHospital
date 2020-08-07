@@ -37,6 +37,18 @@
                         <a class="nav-link" href="{{ route('administration') }}">{{ __("Админка") }}</a>
                     </li>
                     @endrole
+                    
+                    @role('doctor.hospital')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('cabinet') }}">{{ __("Кабинет") }}</a>
+                    </li>
+                    @endrole
+                    
+                    @role('patient.hospital')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('profile') }}">{{ __("Мой профиль") }}</a>
+                    </li>
+                    @endrole
 
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

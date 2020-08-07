@@ -10,6 +10,27 @@
     <title>{{ $title ?? 'eHospital' }}</title>
 
     <!-- Scripts -->
+    
+    <script>
+        var isRoot = false;
+        var isManager = false;
+        var isPatient = false;
+        @auth
+        @if(Auth::user()->hasRole('root.hospital'))
+        isRoot = true;
+        @endif
+        
+        
+        @if(Auth::user()->hasRole('manager.hospital'))
+        isManager = true;
+        @endif
+        
+        @if(Auth::user()->hasRole('patient.hospital'))
+        isPatient = true;
+        @endif
+        @endauth
+    </script>
+    
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -17,6 +38,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    
+    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>

@@ -1,4 +1,3 @@
-var isRoot = false;
 var FullCalendar = require('@fullcalendar/core');
 var FullCalendarDayGrid = require('@fullcalendar/daygrid');
 
@@ -22,7 +21,7 @@ if (calendarEl){
     
     var eventsUrl = '';
     
-    if(isRoot){
+    if(isManager){
        eventsUrl = 'http://' + x + '/api' + path + '/schedule'; 
     } else {
        eventsUrl = 'http://' + x + '/api' + path + '/numberoffreetickets';  
@@ -79,7 +78,6 @@ $(document).ready(function() {
             url: '/api/schedule/' + id + '/doctorstickets',
             method: 'get',
             success: function (data) {
-                debugger;
                 for (var param in data) { 
                     $('tbody.tickets').append('<tr><td>' + data[param].number + '</td><td>' + data[param].time.substr(0,5) + '</td><td>' + data[param].name + ' ' + data[param].surname + '</td></tr>' ); 
                 }
@@ -210,7 +208,7 @@ $(document).ready(function() {
         bootbox.confirm("Вы уверены что хотите отказаться от талона?", function(result){ 
             if (result) {
                $.ajax({
-                    url: 'http://' + x + 'api/ticket/' + id,
+                    url: 'http://' + x + '/api/ticket/' + id,
                     type: 'delete',
                     success: function (data) {
                         if(data){
@@ -222,21 +220,23 @@ $(document).ready(function() {
         });
     });
     // Вывод талонов для заказа
-    $(document).on('click', '.freeTick', function(e) {
-        var id = $(this).data('id');
-        var date = $(this).parent().data('date');
-        $('#freetickets').empty();
-        $.ajax({
-            url: 'http://' + x + '/api/schedule/' + id + '/freetickets',
-            type: 'get',
-            success: function (tickData) {
-                for (var number in tickData) {
-                    $('#freeTickModal .modal-title').text(date);
-                    $('#freetickets').append('<tr><td>' + number + '</td><td>' + tickData[number] + '</td><td>' + '<a class="btn btn-outline-dark orderTick" href="#" data-scheduleid=' + id + ' role="button">Заказать</a></td></tr>' ); 
-                }      
-            }
+    if(isPatient){
+        $(document).on('click', '.freeTick', function(e) {
+            var id = $(this).data('id');
+            var date = $(this).parent().data('date');
+            $('#freetickets').empty();
+            $.ajax({
+                url: 'http://' + x + '/api/schedule/' + id + '/freetickets',
+                type: 'get',
+                success: function (tickData) {
+                    for (var number in tickData) {
+                        $('#freeTickModal .modal-title').text(date);
+                        $('#freetickets').append('<tr><td>' + number + '</td><td>' + tickData[number] + '</td><td>' + '<a class="btn btn-outline-dark orderTick" href="#" data-scheduleid=' + id + ' role="button">Заказать</a></td></tr>' ); 
+                    }      
+                }
+            });
         });
-    });
+    }
     // Заказ талонов
     $(document).on('click', '.orderTick', function(e) {
         e.preventDefault();
@@ -246,7 +246,7 @@ $(document).ready(function() {
         var date = $('#freeTickModal .modal-title').text();
         var freeTickets = $('[data-date="' + date +'"].fc-widget-content .fc-time').text();
         $.ajax({
-            url: 'http://' + x + '/api/schedule/' + id + '/store',
+            url: 'http://' + x + '/schedule/' + id + '/store',
             type: 'post',
             data: { number: number,
                     time: time

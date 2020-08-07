@@ -9,20 +9,17 @@ use Redirect,Response;
 use DateTime;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class TicketController extends Controller
 {
-    use AuthenticatesUsers;
     
     public function patientsTickets(Request $request)
     {
-       // $id = $request->user()->id;
-       $id = 3; 
+        $id = Auth::id();
         $patient = Patient::where('patients.user_id', $id)->first();
         $tickets = Patient::where('patients.user_id', $id)->join('tickets','tickets.patient_id', '=', 'patients.id' )->join('schedules','tickets.schedule_id', '=', 'schedules.id' )->join('doctors', 'doctors.id', '=', 'schedules.doctor_id')->select('tickets.id','tickets.number','schedules.start', 'tickets.time', 'doctors.name as doctor_name', 'doctors.id as doctor_id')->get();
 
-        return view ('profile', compact(['tickets', 'patient']))->with('title', 'My profile');
+        return view ('profile', compact(['tickets', 'patient']))->with('title', 'Мой профиль');
     } 
     
     public function doctorsTickets(Request $request, $schedule)
@@ -36,15 +33,14 @@ class TicketController extends Controller
     public function store(Request $request, $schedule)
     {
         $id = Auth::id();
-        //$id = 3;
-//        $patient = Patient::where('patients.user_id', $id)->first();
-//        $insert = [ 'number' => $request->number,
-//            'time' => $request->time,
-//            'schedule_id' => $schedule,
-//            'patient_id' => $patient->id
-//            ];
-//        $ticket = Ticket::create($insert);
-        return Response::json($id);
+        $patient = Patient::where('patients.user_id', $id)->first();
+        $insert = [ 'number' => $request->number,
+            'time' => $request->time,
+            'schedule_id' => $schedule,
+            'patient_id' => $patient->id
+            ];
+        $ticket = Ticket::create($insert);
+        return Response::json($ticket);
     }
     
     public function freeTickets(Schedule $schedule)

@@ -1,13 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    
-@auth
-    <script>
-        //var isRoot = {{ (Auth::user()->hasRole('manager.hospital')) }}; 
-    </script>
-@endauth
-            <!-- Карточка доктора -->
+    <!-- Карточка доктора -->
 
 <div class="row about">
    <div class="col-lg-4 col-md-4 col-sm-12">
@@ -23,10 +17,10 @@
      
     <h3 id="docName"> {{ $doctor->name }} </h3>
     @role('root.hospital')
-                            <a href="#" id="editPencil" data-toggle="modal" data-target="#editDocModal">
-                                <i class="fa fa-pencil"></i>
-                            </a>
-                        @endrole
+        <a href="#" id="editPencil" data-toggle="modal" data-target="#editDocModal">
+            <i class="fa fa-pencil"></i>
+        </a>
+    @endrole
     <p id="docEducation" >Образование: {{ $doctor->education }} </p><br>
     <p id="docExperience">Опыт работы: {{ $doctor->experience }} </p>
     <p></p>

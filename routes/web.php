@@ -30,4 +30,6 @@ Route::resource('doctor', 'DoctorController');
 Route::post('doctor/{doctor}/image', 'DoctorController@image');
 
 Route::get('/cabinet', 'DoctorController@cabinet')->name('cabinet')->middleware('role:doctor.hospital');
-Route::get('/profile', 'TicketController@patientsTickets') ->middleware('role:patient.hospital');
+Route::get('/profile', 'TicketController@patientsTickets')->name('profile')->middleware('role:patient.hospital');
+
+Route::post('schedule/{schedule}/store', 'TicketController@store')->middleware('role:patient.hospital');
