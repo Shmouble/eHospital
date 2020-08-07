@@ -2,8 +2,12 @@
 
 @section('content')
     <div class="content">
-        <div class="title m-b-md">
-            eHospital
+        <div id="departments">
+            <ul class="nav navbar-nav">
+            @foreach($departments as $department)
+                <li><a href="{{url('department/' . $department->id)}}">{{$department->name}}</a></li>
+            @endforeach
+            </ul>
         </div>
 
         <div id="latestNews">

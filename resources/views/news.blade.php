@@ -19,8 +19,12 @@
                 <div class="newsImage">
                     <img src="{{ asset('storage/' . $news->news_image) }}" alt='News image'>
                 </div>
-                <p class="newsText">{{ Str::limit($news->news_text, 300)  }}</p>
-                <a href="{{ url('news/read/' . $news->id) }}" class="btn btn-secondary newsButton">Подробнее</a>
+                <div class="newsText">
+                    <p>{{ Str::limit($news->news_text, 400)  }}</p>
+                </div>
+                <div>
+                    <a href="{{ url('news/read/' . $news->id) }}" class="btn btn-secondary newsButton">Подробнее</a>
+                </div>
             </div>
         @endforeach
     </div>

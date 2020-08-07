@@ -315,7 +315,7 @@ $(document).ready(function() {
                     '<div class="newsImage">' +
                     '<img src="' + 'storage/' + data.news_image + '" alt="News image">' +
                     '</div>' +
-                    '<p class="newsText">' + data.news_text.substring(0, 300) + '...' +  '</p>' +
+                    '<p class="newsText">' + data.news_text.substring(0, 400) + '...' +  '</p>' +
                     '<a href="' + 'news/read/' + data.id + '" class="btn btn-secondary newsButton">Подробнее</a>' +
                     '</div>'
                 );
