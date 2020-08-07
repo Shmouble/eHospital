@@ -1,0 +1,94 @@
+html, body {
+    color: #636b6f;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 200;
+/*    height: 100vh;*/
+}
+
+.full-height {
+    height: 50vh;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.top-right {
+    position: absolute;
+    right: 10px;
+    top: 18px;
+}
+
+.content {
+    text-align: center;
+}
+
+.title {
+    font-size: 84px;
+}
+
+.links > a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+.editBtn {
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.fc-day-grid-event.fc-h-event.fc-event.fc-start.fc-end.fc-draggable {
+    margin-top: 40px;
+}
+
+.ui-timepicker-container{
+    z-index:9999 !important
+}
+
+#docImg{
+    width:100%;
+    max-width:400px;
+}
+
+a.disabled {
+pointer-events: none;
+cursor: default;
+}
+.about.row{
+ margin: 1em 5%;
+ padding: 1em;
+/* position: relative;*/
+}
+.about h1{
+ color:#F97300;
+ margin: 2em;
+}
+.about .desc{
+ padding: 2em;
+ border-left:4px solid #10828C;
+}
+.about .desc h3{
+ color: #10828C;
+}
+.about .desc p{
+ line-height:2;
+ color:#888;
+}
+#calendar{
+    margin: 0 5%;
+}
